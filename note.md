@@ -69,7 +69,7 @@ semua tentang kubernetes
 
 ## to switch kubernetes enviroment from GCP to local
 
-- kubectl config use-context `docker-desktop`.
+- kubectl config use-context `docker-desktop`..
 
 ## to get nodes
 
