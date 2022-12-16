@@ -73,7 +73,7 @@ semua tentang kubernetes
 
 ## to get nodes
 
-- kubectl get nodes.
+- kubectl get nodes..
 
 ---
 
