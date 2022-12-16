@@ -1,0 +1,8 @@
+name: tests-ticket
+
+on: pull_request
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: action/checkout@v2
+      - cd ticket && npm install && npm run test:ci

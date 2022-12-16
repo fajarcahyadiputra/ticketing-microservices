@@ -1,4 +1,5 @@
-name: tests
+name: tests-auth
+
 on: pull_request
 jobs:
   build:
