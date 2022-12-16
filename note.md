@@ -63,6 +63,18 @@ semua tentang kubernetes
 
 - kubectl port-forward `name pods` 4222:4222
 
+## to know config
+
+- kubectl config view
+
+## to switch kubernetes enviroment from GCP to local
+
+- kubectl config use-context `docker-desktop`
+
+## to get nodes
+
+- kubectl get nodes
+
 ---
 
 # skaffold
