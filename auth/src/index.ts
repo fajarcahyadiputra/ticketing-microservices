@@ -3,7 +3,7 @@ import { app } from './app';
 import { DatabaseConnectionError } from '@fajartickets/common/build/errors/database-connection-error';
 
 const startDb = async() => {
-    console.log("iuiu");
+    console.log("sdsfsf");
     
     if(!process.env.JWT_KEY){
         throw new Error("JWT_KEY must be defined in env")
