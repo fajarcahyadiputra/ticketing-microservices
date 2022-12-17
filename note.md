@@ -75,6 +75,10 @@ semua tentang kubernetes
 
 - kubectl get nodes..
 
+## logs
+
+- kubectl logs `pod name`
+
 ---
 
 # skaffold
