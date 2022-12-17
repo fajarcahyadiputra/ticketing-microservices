@@ -1,8 +1,14 @@
 name: deploy-auth
 
 env:
+  PROJECT_ID: ${{ secrets.PROJECT_ID }}
   DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
   DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+  GKE_CLUSTER: ${{ secrets.GKE_CLUSTER }}
+  GKE_ZONE: ${{ secrets.GKE_ZONE }}
+  DEPLOYMENT_NAME: auth
+  REPOSITORY: auth
+  IMAGE: fajarcahyadi/auth
   
 on:
   push:
@@ -21,5 +27,14 @@ jobs:
       - uses: google-github-actions/setup-gcloud@94337306dda8180d967a56932ceb4ddcf01edae7
         with:
           credentials_json: '${{ secrets.CREDENTIALS_JSON }}'
+      - run: |-
+          gcloud --quite auth configure
+      - uses: google-github-actions/get-gke-credentials@fb08709ba27618c31c09e014e1d8364b02e5042e
+        with:
+          cluster_name: $GKE_CLUSTER
+          location: $GKE_ZONE
+          credentials_json: '${{ secrets.CREDENTIALS_JSON }}'
+      # Build the Docker image
+      - run: kubectl rollout restart deployment auth-depl
 
         
