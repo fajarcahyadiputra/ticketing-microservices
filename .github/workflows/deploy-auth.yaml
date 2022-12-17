@@ -4,11 +4,6 @@ env:
   PROJECT_ID: ${{ secrets.PROJECT_ID }}
   DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
   DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-  GKE_CLUSTER: ${{ secrets.GKE_CLUSTER }}
-  GKE_ZONE: ${{ secrets.GKE_ZONE }}
-  DEPLOYMENT_NAME: auth
-  REPOSITORY: auth
-  IMAGE: fajarcahyadi/auth
   
 on:
   push:
@@ -24,16 +19,15 @@ jobs:
       - run: cd auth && docker build -t fajarcahyadi/auth . 
       - run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
       - run: docker push fajarcahyadi/auth
-      - uses: google-github-actions/setup-gcloud@94337306dda8180d967a56932ceb4ddcf01edae7
+      - uses: google-github-actions/auth@v1
         with:
           credentials_json: '${{ secrets.CREDENTIALS_JSON }}'
       - run: |-
           gcloud --quiet auth configure-docker
-      - uses: google-github-actions/get-gke-credentials@fb08709ba27618c31c09e014e1d8364b02e5042e
+      - uses: google-github-actions/get-gke-credentials@v1
         with:
-          cluster_name: $GKE_CLUSTER
-          location: $GKE_ZONE
-          credentials_json: '${{ secrets.CREDENTIALS_JSON }}'
+          cluster_name: 'ticketing-dev'
+          location: 'asia-southeast1-a'
       - run: kubectl rollout restart deployment auth-depl 
 
         
