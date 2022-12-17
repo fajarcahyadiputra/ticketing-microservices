@@ -75,9 +75,13 @@ semua tentang kubernetes
 
 - kubectl get nodes..
 
-## logs
+## logs to see logs of console log
 
 - kubectl logs `pod name`
+
+## describe to seed etail pod
+
+- kubectl describe pod `name pod`
 
 ---
 

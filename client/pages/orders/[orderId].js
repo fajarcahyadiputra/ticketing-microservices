@@ -43,11 +43,11 @@ const ShowOrderList = ({order, currentUser}) => {
         <div>
 
            <p>{timeLeft > 0 ? <p>Time left to pay: {timeLeft} Seconds until expires</p>: order.status=="complete"?"Complete":"Order Expires"} </p>
-           {order.status=="created" && order.status === "awaiting:payment" &&  <StripeCheckout token={({id}) => doRequest({token:id})} 
+           <StripeCheckout token={({id}) => doRequest({token:id})} 
            stripeKey="pk_test_51MEvTdFXe7sbZaR1Vh9UKPG4ykr0tU0Op57k2UGerK1x3lVy2GXQkQcYQPvDwqVEieV4LN5s6u7y4r0sqYNrCAg400TAGnWWOz"
            amount={order.ticket.price * 100}
            email={currentUser.email}
-           />}
+           />
 
            {errors}
         </div>
