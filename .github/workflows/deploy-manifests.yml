@@ -1,4 +1,4 @@
-name: deploy-auth
+name: deploy-manifests
 
 env:
   PROJECT_ID: ${{ secrets.PROJECT_ID }}
@@ -6,24 +6,18 @@ env:
   DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
   GKE_CLUSTER: ${{ secrets.GKE_CLUSTER }}
   GKE_ZONE: ${{ secrets.GKE_ZONE }}
-  DEPLOYMENT_NAME: auth
-  REPOSITORY: auth
-  IMAGE: fajarcahyadi/auth
   
 on:
   push:
     branches:
       - master
     paths:
-      - 'auth/**'
+      - 'infra/**'
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - run: cd auth && docker build -t fajarcahyadi/auth . 
-      - run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-      - run: docker push fajarcahyadi/auth
       - uses: google-github-actions/setup-gcloud@94337306dda8180d967a56932ceb4ddcf01edae7
         with:
           credentials_json: '${{ secrets.CREDENTIALS_JSON }}'
@@ -34,6 +28,4 @@ jobs:
           cluster_name: $GKE_CLUSTER
           location: $GKE_ZONE
           credentials_json: '${{ secrets.CREDENTIALS_JSON }}'
-      - run: kubectl rollout restart deployment auth-depl 
-
-        
+      - run: kubectl apply -f infra/k8s && kubectl -f apply infra/k8f-prod
