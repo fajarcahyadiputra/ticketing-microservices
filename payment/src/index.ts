@@ -14,6 +14,8 @@ const {
 } = process.env;
 
 const startDb = async() => {
+    console.log('okoko');
+    
     if(!JWT_KEY){
         throw new Error("JWT_KEY must be defined in env")
     }

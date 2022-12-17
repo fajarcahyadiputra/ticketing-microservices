@@ -14,7 +14,7 @@ const {
 } = process.env;
 
 const startDb = async() => {
-    console.log("okokokoko");
+    console.log("loading...");
     
     if(!JWT_KEY){
         throw new Error("JWT_KEY must be defined in env")
