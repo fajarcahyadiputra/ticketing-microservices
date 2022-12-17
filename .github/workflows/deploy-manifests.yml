@@ -27,4 +27,4 @@ jobs:
         with:
           cluster_name: 'ticketing-dev'
           location: 'asia-southeast1-a'
-      - run: kubectl apply -f infra/k8s && kubect apply -f infra/k8f-prod
+      - run: kubectl apply -f infra/k8s && kubectl apply -f infra/k8f-prod
