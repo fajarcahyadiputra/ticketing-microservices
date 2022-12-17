@@ -33,7 +33,7 @@ const startDb = async() => {
         throw new Error("NATS_CLIENT_ID must be defined in env")
     }
     try {
-        console.log("loading...");
+        console.log("loading.....");
         
         await mongoose.connect(MONGO_URI);
         await natsWrapper.connect(NATS_CLUSTER_ID,NATS_CLIENT_ID,NATS_URL)

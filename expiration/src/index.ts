@@ -13,7 +13,7 @@ const start = async () => {
   }
 
   try {
-    console.log('okkok');
+    console.log('okkok...');
     
     await natsWrapper.connect(
       process.env.NATS_CLUSTER_ID,
