@@ -4,6 +4,7 @@ deploy:
   kubectl:
     manifests:
       - ./infra/k8s/* #Tempat file yaml/config for kubernetes
+      - ./infra/k8f-dev/*
 build:
   local:
     push: false
