@@ -26,5 +26,5 @@ jobs:
       - uses: google-github-actions/get-gke-credentials@v1
         with:
           cluster_name: $GKE_CLUSTER
-          location: $GKE_ZONE
+          location: 'asia-southeast1-a'
       - run: kubectl apply -f infra/k8s && kubectl -f apply infra/k8f-prod
