@@ -34,7 +34,6 @@ jobs:
           cluster_name: $GKE_CLUSTER
           location: $GKE_ZONE
           credentials_json: '${{ secrets.CREDENTIALS_JSON }}'
-      # Build the Docker image
-      - run: kubectl rollout restart deployment auth-depl
+      - run: kubectl rollout restart deployment auth-depl 
 
         
