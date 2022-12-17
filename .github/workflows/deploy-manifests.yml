@@ -27,5 +27,5 @@ jobs:
         with:
           cluster_name: $GKE_CLUSTER
           location: $GKE_ZONE
-          credentials_json: '${{ secrets.CREDENTIALS_JSON }}'
+          credentials: '${{ secrets.GKE_SA_KEY }}'
       - run: kubectl apply -f infra/k8s && kubectl -f apply infra/k8f-prod
