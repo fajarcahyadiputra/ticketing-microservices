@@ -1,5 +1,16 @@
 name: deploy-auth
 
+env:
+  PROJECT_ID: ${{ secrets.PROJECT_ID }}
+  GKE_ZONE: ${{ secrets.GKE_ZONE }}
+  GKE_CLUSTER: ${{ secrets.GKE_CLUSTER }}
+  GKE_SA_KEY: ${{ secrets.GKE_SA_KEY }}
+  DEPLOYMENT_NAME: auth
+  REPOSITORY: auth
+  IMAGE: fajarcahyadi/auth
+  DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+  DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+  
 on:
   push:
     branches:
@@ -13,8 +24,17 @@ jobs:
       - uses: actions/checkout@v3
       - run: cd auth && docker build -t fajarcahyadi/auth . 
       - run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-        env:
-          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
       - run: docker push fajarcahyadi/auth
+      - uses: google-github-actions/setup-gcloud@94337306dda8180d967a56932ceb4ddcf01edae7
+        with:
+          service_account_key: $GKE_SA_KEY
+          project_id: $PROJECT_ID
+      - run: |-
+          gcload --quiet auth configure-docker
+      # Get the GKE credentials so we can deploy to the cluster
+      - uses: google-github-actions/get-gke-credentials@fb08709ba27618c31c09e014e1d8364b02e5042e
+        with:
+          cluster_name: $GKE_CLUSTER
+          location: $GKE_ZONE
+          credentials: $GKE_SA_KEY
         
